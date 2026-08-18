@@ -21,10 +21,7 @@ The assignment text says six models but explicitly lists five; this implementati
 ## Evaluation Metrics
 Accuracy, AUC, Precision, Recall, F1 Score, Matthews Correlation Coefficient (MCC).
 
-## Run Streamlit
-```bash
-pip install -r requirements.txt
-streamlit run app.py
-```
+## Run Streamlit link
+https://project-folder-pgtjny3kfxappbfgfmmxhuy.streamlit.app
 
 ##Notebook name - 2025ac05932_ML_assignment.ipynb
