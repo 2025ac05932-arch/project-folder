@@ -18,7 +18,7 @@ except Exception as e:
     st.stop()
 
 selected_model = st.sidebar.selectbox("Select Classification Model", list(trained_models.keys()))
-df = pd.read_csv("test_data.csv")
+df = pd.read_csv("Data/*.csv")
 X = df.drop(columns=["Attrition", "EmployeeCount", "EmployeeNumber", "Over18", "StandardHours"], errors="ignore")
 
 st.subheader("Enter Employee Information")
