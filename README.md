@@ -8,7 +8,7 @@ IBM HR Analytics Employee Attrition & Performance dataset from Kaggle. It contai
 
 Kaggle: https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset
 
-Github repository - https://github.com/2025ac05932-arch/peoject-folder
+Github repository - https://github.com/2025ac05932-arch/project-folder
 ## Models
 1. Logistic Regression
 2. Decision Tree Classifier
