@@ -26,12 +26,31 @@ input_data = {}
 columns = st.columns(3)
 for i, feature in enumerate(X.columns):
     with columns[i % 3]:
-        if X[feature].dtype == "object":
-            options = sorted(X[feature].dropna().unique().tolist())
-            input_data[feature] = st.selectbox(feature, options, key=feature)
-        else:
-            input_data[feature] = st.number_input(feature, min_value=float(X[feature].min()), max_value=float(X[feature].max()), value=float(X[feature].median()), step=1.0 if X[feature].dtype == "int64" else 0.1, key=feature)
 
+        if X[feature].dtype == "object":
+            options = sorted(X[feature].dropna().astype(str).unique().tolist())
+
+            input_data[feature] = st.selectbox(
+                feature,
+                options,
+                key=feature
+            )
+
+        else:
+            series = pd.to_numeric(X[feature], errors="coerce").dropna()
+
+            min_value = float(series.min())
+            max_value = float(series.max())
+            median_value = float(series.median())
+
+            input_data[feature] = st.number_input(
+                feature,
+                min_value=min_value,
+                max_value=max_value,
+                value=median_value,
+                step=1.0,
+                key=feature
+            )
 if st.button("🔮 Predict Attrition", type="primary"):
     model = trained_models[selected_model]
     input_df = pd.DataFrame([input_data])
