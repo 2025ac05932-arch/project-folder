@@ -8,6 +8,7 @@ IBM HR Analytics Employee Attrition & Performance dataset from Kaggle. It contai
 
 Kaggle: https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset
 
+Github repository - https://github.com/2025ac05932-arch/peoject-folder
 ## Models
 1. Logistic Regression
 2. Decision Tree Classifier
@@ -26,5 +27,4 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-## BITS Virtual Lab
-Open `notebooks/ML_Assignment_IBM_HR.ipynb` in the BITS Virtual Lab and execute it. It trains/evaluates all models and generates `test_data.csv` and `model/model_comparison.csv`. No `.pkl` files are required.
+##Notebook name - 2025ac05932_ML_assignment.ipynb
