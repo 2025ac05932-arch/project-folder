@@ -9,7 +9,7 @@ st.write("Interactive classification of employee attrition using five machine-le
 @st.cache_resource
 def load_models():
     return train_models(save_test_data=False)
-
+    
 try:
     results, trained_models = load_models()
 except Exception as e:
@@ -28,66 +28,35 @@ input_data = {}
 # Create 3 columns for the input fields
 columns = st.columns(3)
 
-for i, feature in enumerate(X.columns):
 
+for i, feature in enumerate(X.columns):
     with columns[i % 3]:
 
-        # Categorical variables
-        if X[feature].dtype in ["object", "category", "bool"]:
-
-            options = sorted(
-                X[feature]
-                .dropna()
-                .astype(str)
-                .unique()
-                .tolist()
-            )
+        if X[feature].dtype == "object":
+            options = sorted(X[feature].dropna().astype(str).unique().tolist())
 
             input_data[feature] = st.selectbox(
                 feature,
                 options,
-                key=f"input_{feature}"
+                key=feature
             )
 
-        # Numeric variables
         else:
-
-            series = pd.to_numeric(
-                X[feature],
-                errors="coerce"
-            ).dropna()
-
-            if len(series) == 0:
-                continue
+            series = pd.to_numeric(X[feature], errors="coerce").dropna()
 
             min_value = float(series.min())
             max_value = float(series.max())
             median_value = float(series.median())
 
-            # Integer fields
-            if pd.api.types.is_integer_dtype(X[feature]):
+            input_data[feature] = st.number_input(
+                feature,
+                min_value=min_value,
+                max_value=max_value,
+                value=median_value,
+                step=1.0,
+                key=feature
+            )
 
-                input_data[feature] = st.number_input(
-                    feature,
-                    min_value=int(min_value),
-                    max_value=int(max_value),
-                    value=int(median_value),
-                    step=1,
-                    key=f"input_{feature}"
-                )
-
-            # Decimal fields
-            else:
-
-                input_data[feature] = st.number_input(
-                    feature,
-                    min_value=min_value,
-                    max_value=max_value,
-                    value=median_value,
-                    step=0.1,
-                    key=f"input_{feature}"
-                )
-            
 if st.button("🔮 Predict Attrition", type="primary"):
     model = trained_models[selected_model]
     input_df = pd.DataFrame([input_data])
